@@ -1,7 +1,7 @@
 import RPi.GPIO as gpio
 import time
 
-def distance(measure='cm'):
+def distance(measure='m'):
     try:
         gpio.setmode(gpio.BOARD)
         gpio.setup(12, gpio.OUT)
@@ -16,13 +16,8 @@ def distance(measure='cm'):
 
         tl = sig - nosig
 
-        if measure == 'cm':
-            distance = tl / 0.000058
-        elif measure == 'in':
-            distance = tl / 0.000148
-        else:
-            print('improper choice of measurement: in or cm')
-            distance = None
+        if measure == 'm':
+            distance = tl / 0.00058
 
         gpio.cleanup()
         return distance
